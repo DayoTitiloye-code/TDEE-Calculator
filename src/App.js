@@ -1,9 +1,9 @@
-import TDEECalculator from './components/TDEECalculator'
+import TDEEPage from './components/TDEEPage'
 import 'bootstrap/dist/css/bootstrap.min.css'
 function App() {
   return (
     <div className="App">
-      <TDEECalculator />
+      <TDEEPage />
     </div>
   )
 }
