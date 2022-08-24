@@ -3,9 +3,17 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import useForm from './useForm'
 import Select from 'react-select'
+import validation from './validation'
+
 function TDEECalculator({ submitForm }) {
-  const { handleChange, handleSubmit, values, activity, activityHandler } =
-    useForm(submitForm)
+  const {
+    handleChange,
+    handleSubmit,
+    values,
+    activity,
+    activityHandler,
+    errors,
+  } = useForm(submitForm, validation)
   return (
     <div className="text-center pt-3">
       <Form onSubmit={handleSubmit} noValidate>
@@ -37,6 +45,7 @@ function TDEECalculator({ submitForm }) {
             value={values.age}
             onChange={handleChange}
           />
+          {errors.age && <p style={{ color: 'red' }}>{errors.age}</p>}
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -48,7 +57,9 @@ function TDEECalculator({ submitForm }) {
             value={values.weight}
             onChange={handleChange}
           />
+          {errors.weight && <p style={{ color: 'red' }}>{errors.weight}</p>}
         </Form.Group>
+
         <Form.Group className="mb-3">
           <Form.Label>How tall are you (cm)</Form.Label>
           <Form.Control
@@ -58,12 +69,11 @@ function TDEECalculator({ submitForm }) {
             value={values.height}
             onChange={handleChange}
           />
+          {errors.height && <p style={{ color: 'red' }}>{errors.height}</p>}
         </Form.Group>
+
         <Form.Label>How active are you</Form.Label>
         <Select options={activity} onChange={activityHandler} />
-        {/* <option value="1">Sedentary/ lightly active</option>
-          <option value="2">Active/ morderately active</option>
-          <option value="3">Vigorous/ vigorously active</option> */}
         <Form.Text className="text-muted">
           <strong>*Sedentary lifestyle </strong> one that involves very little
           or no physical exercise, wherein most of the day is spent sitting,

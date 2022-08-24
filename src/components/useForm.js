@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const useForm = () => {
+const useForm = (callback, validation) => {
   const [values, setValues] = useState({
     age: '',
     weight: '',
@@ -23,9 +23,14 @@ const useForm = () => {
     },
   ]
   const [active, setActive] = useState(activity)
+
   const activityHandler = (event) => {
     setActive(event.label)
   }
+
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const handleChange = (event) => {
     const { name, value } = event.target
     setValues({
@@ -38,9 +43,24 @@ const useForm = () => {
     event.preventDefault()
     console.log(values)
     console.log(active)
+    setErrors(validation(values))
+    setIsSubmitting(true)
   }
 
-  return { handleChange, handleSubmit, values, activityHandler, activity }
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      callback()
+    }
+  }, [errors])
+
+  return {
+    handleChange,
+    handleSubmit,
+    values,
+    activityHandler,
+    activity,
+    errors,
+  }
 }
 
 export default useForm
