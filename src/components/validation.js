@@ -25,6 +25,14 @@ const validation = (values) => {
     errors.height = 'Your height cannot be this high'
   }
 
+  if (!values.gender) {
+    errors.gender = 'Gender is required'
+  }
+
+  // if (values.activity !== 1 || values.activity !== 2 || values.activity !== 3) {
+  //   errors.activity = 'Activity level is required'
+  // }
+
   return errors
 }
 

@@ -34,6 +34,7 @@ function TDEECalculator({ submitForm }) {
             value="Female"
             onChange={handleChange}
           />
+          {errors.gender && <p style={{ color: 'red' }}>{errors.gender}</p>}
         </div>
 
         <Form.Group className="mb-3">
@@ -74,6 +75,7 @@ function TDEECalculator({ submitForm }) {
 
         <Form.Label>How active are you</Form.Label>
         <Select options={activity} onChange={activityHandler} />
+        {/* {errors.activity && <p style={{ color: 'red' }}>{errors.activity}</p>} */}
         <Form.Text className="text-muted">
           <strong>*Sedentary lifestyle </strong> one that involves very little
           or no physical exercise, wherein most of the day is spent sitting,
@@ -88,6 +90,7 @@ function TDEECalculator({ submitForm }) {
           would be considered hard to extremely hard, making it difficult to
           speak in full sentences.
         </Form.Text>
+
         {/*sedentary - https://www.workplacetesting.com/definition/1000/sedentary-lifestyle 
             active - https://www.drugs.com/cg/benefits-of-an-active-lifestyle.html
             vigorous - https://www.verywellfit.com/what-is-vigorous-intensity-exercise-3435408
